@@ -23,26 +23,8 @@
             "name": "keyvaultDeployment",
             "properties": {
                 "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "resources": [
-                        {
-                            "type": "Microsoft.KeyVault/vaults",
-                            "apiVersion": "2024-12-01-preview",
-                            "name": "[parameters('vaultName')]",
-                            "location": "[parameters('location')]",
-                            "properties": {
-                                "sku": {
-                                    "family": "A",
-                                    "name": "standard"
-                                },
-                                "tenantId": "f01e930a-b52e-42b1-b70f-a8882b5d043b",
-                                "accessPolicies": []
-                            },
-                            "tags": "[parameters('tags')]"
-                        }
-                    ]
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/modules/keyvault/keyvault.json"
                 }
             }
         },
@@ -55,23 +37,8 @@
             ],
             "properties": {
                 "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "resources": [
-                        {
-                            "type": "Microsoft.Storage/storageAccounts",
-                            "apiVersion": "2023-01-01",
-                            "name": "[parameters('storageName')]",
-                            "location": "[parameters('location')]",
-                            "sku": {
-                                "name": "Standard_LRS"
-                            },
-                            "kind": "StorageV2",
-                            "properties": {},
-                            "tags": "[parameters('tags')]"
-                        }
-                    ]
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/modules/storageAccount/storageAccount.json"
                 }
             }
         }
