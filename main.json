@@ -25,6 +25,12 @@
                 "mode": "Incremental",
                 "templateLink": {
                     "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/keyvault/keyvault.json"
+                },
+                "parameters": {
+                    "vaultName": { "value": "[parameters('vaultName')]" },
+                    "location": { "value": "[parameters('location')]" },
+                    "tags": { "value": "[parameters('tags')]" },
+                    "tenantId": { "value": "[parameters('tenantId')]" }
                 }
             }
         },
@@ -39,6 +45,11 @@
                 "mode": "Incremental",
                 "templateLink": {
                     "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/storageAccount/storageAccount.json"
+                },
+                "parameters": {
+                    "storageName": { "value": "[parameters('storageName')]" },
+                    "location": { "value": "[parameters('location')]" },
+                    "tags": { "value": "[parameters('tags')]" }
                 }
             }
         }
