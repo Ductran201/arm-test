@@ -44,13 +44,32 @@
             "location": "[parameters('location')]",
             "tags": "[parameters('tags')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('nsgsConfig')[sub( length(parameters('nsgsConfig')), 1 )].name)]"
+                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('nsgsConfig')[sub(length(parameters('nsgsConfig')), 1)].name)]"
             ],
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": "[parameters('vnetConfig').address_space]"
                 },
-                "subnets": "[array(map(parameters('subnetsConfig'), lambda('subnet', createObject('name', lambdaVariables('subnet').name, 'properties', createObject('addressPrefix', lambdaVariables('subnet').address_prefixes[0], 'networkSecurityGroup', createObject('id', reference(resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[indexOf(parameters('subnetsConfig'), lambdaVariables('subnet'))].name)).id))))))]"
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetsConfig')[0].name]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetsConfig')[0].address_prefixes[0]]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[0].name)]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnetsConfig')[1].name]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetsConfig')[1].address_prefixes[0]]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[1].name)]"
+                            }
+                        }
+                    }
+                ]
             }
         }
     ],
