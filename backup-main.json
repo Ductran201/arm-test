@@ -123,19 +123,6 @@
             "apiVersion": "2024-10-01-preview",
             "name": "[parameters('flexibleServers_duc_flexible_mysql_name')]",
             "location": "Southeast Asia",
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "sku": {
                 "name": "Standard_B1ms",
                 "tier": "Burstable"
@@ -216,19 +203,6 @@
             "apiVersion": "2024-07-01",
             "name": "[parameters('networkSecurityGroups_private_nsg_name')]",
             "location": "southeastasia",
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "securityRules": [
                     {
@@ -278,19 +252,6 @@
             "apiVersion": "2024-07-01",
             "name": "[parameters('networkSecurityGroups_public_nsg_name')]",
             "location": "southeastasia",
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "securityRules": [
                     {
@@ -320,19 +281,6 @@
             "apiVersion": "2024-06-01",
             "name": "[parameters('privateDnsZones_privatelink_blob_core_windows_net_name')]",
             "location": "global",
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {}
         },
         {
@@ -340,19 +288,6 @@
             "apiVersion": "2024-06-01",
             "name": "[parameters('privateDnsZones_privatelink_mysql_database_azure_com_name')]",
             "location": "global",
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {}
         },
         {
@@ -360,19 +295,6 @@
             "apiVersion": "2025-01-01",
             "name": "[parameters('storageAccounts_ducstorageacc123_name')]",
             "location": "southeastasia",
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "sku": {
                 "name": "Standard_LRS",
                 "tier": "Standard"
@@ -6972,19 +6894,6 @@
                 "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_mysql_database_azure_com_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_duc_vnet_name'))]"
             ],
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "registrationEnabled": false,
                 "resolutionPolicy": "Default",
@@ -7002,19 +6911,6 @@
                 "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_duc_vnet_name'))]"
             ],
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "registrationEnabled": false,
                 "resolutionPolicy": "Default",
@@ -7032,19 +6928,6 @@
                 "[resourceId('Microsoft.DBforMySQL/flexibleServers', parameters('flexibleServers_duc_flexible_mysql_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_duc_vnet_name'), 'private-subnet')]"
             ],
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "privateLinkServiceConnections": [
                     {
@@ -7080,19 +6963,6 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_ducstorageacc123_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_duc_vnet_name'), 'private-subnet')]"
             ],
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "privateLinkServiceConnections": [
                     {
@@ -7166,19 +7036,6 @@
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_private_nsg_name'))]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_public_nsg_name'))]"
             ],
-            "tags": {
-                "Environment": "DEV",
-                "Region": "Southeast Asia",
-                "BU": "FHN.NGT",
-                "Budget": "200",
-                "BusinessCriticality": "Low",
-                "DataClassification": "Public",
-                "Expiration": "2025-10-30",
-                "MonitoringEnable": "Yes",
-                "OwnerAccount": "HungNX22@fpt.com",
-                "ProjectKey": "FHNNGTDEVOPS",
-                "TicketID": "4169990"
-            },
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [

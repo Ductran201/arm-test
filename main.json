@@ -2,17 +2,14 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "vaultName": {
-            "type": "string"
-        },
         "location": {
             "type": "string"
         },
         "tags": {
             "type": "object"
         },
-        "storageName": {
-            "type": "string"
+        "network": {
+            "type": "object"
         }
     },
     "variables": {},
@@ -24,32 +21,27 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/keyvault/keyvault.json"
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/network/network.json"
                 },
                 "parameters": {
-                    "vaultName": { "value": "[parameters('vaultName')]" },
-                    "location": { "value": "[parameters('location')]" },
-                    "tags": { "value": "[parameters('tags')]" },
-                    "tenantId": { "value": "[parameters('tenantId')]" }
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "name": "storageDeployment",
-            "dependsOn": [
-                "keyvaultDeployment"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/storageAccount/storageAccount.json"
-                },
-                "parameters": {
-                    "storageName": { "value": "[parameters('storageName')]" },
-                    "location": { "value": "[parameters('location')]" },
-                    "tags": { "value": "[parameters('tags')]" }
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tags": {
+                        "value": "[parameters('tags')]"
+                    },
+                    "vnetConfig": {
+                        "value": "[parameters('network').vnetConfig]"
+                    },
+                    "subnetsConfig": {
+                        "value": "[parameters('network').subnetsConfig]"
+                    },
+                    "nsgsConfig": {
+                        "value": "[parameters('network').nsgsConfig]"
+                    },
+                    "securityRules": {
+                        "value": "[parameters('network').securityRules]"
+                    }
                 }
             }
         }

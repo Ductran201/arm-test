@@ -1,1 +1,22 @@
-az deployment group create   --resource-group ductt43   --template-file main.json   --parameters @parameters/global-param.json
+Test-AzResourceGroupDeployment `
+  -ResourceGroupName "ductt43" `
+  -TemplateFile ".\main.json" `
+  -TemplateParameterFile ".\parameters\global-param.json"
+
+New-AzResourceGroupDeployment `
+  -ResourceGroupName "ductt43" `
+  -TemplateFile ".\main.json" `
+  -TemplateParameterFile ".\parameters\global-param.json" `
+  -Mode Complete `
+  -WhatIf
+
+New-AzResourceGroupDeployment `
+  -ResourceGroupName "ductt43" `
+  -TemplateFile ".\main.json" `
+  -TemplateParameterFile ".\parameters\global-param.json" `
+  -Mode Complete
+
+New-AzResourceGroupDeployment `  
+  -ResourceGroupName "ductt43" `  
+  -TemplateFile ".\empty.json" `  
+  -Mode Complete 
