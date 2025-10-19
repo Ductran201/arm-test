@@ -8,8 +8,17 @@
         "tags": {
             "type": "object"
         },
-        "network": {
+        "vnetConfig": {
             "type": "object"
+        },
+        "subnetsConfig": {
+            "type": "array"
+        },
+        "nsgsConfig": {
+            "type": "array"
+        },
+        "securityRules": {
+            "type": "array"
         }
     },
     "variables": {},
@@ -31,16 +40,16 @@
                         "value": "[parameters('tags')]"
                     },
                     "vnetConfig": {
-                        "value": "[parameters('network').vnetConfig]"
+                        "value": "[parameters('vnetConfig')]"
                     },
                     "subnetsConfig": {
-                        "value": "[parameters('network').subnetsConfig]"
+                        "value": "[parameters('subnetsConfig')]"
                     },
                     "nsgsConfig": {
-                        "value": "[parameters('network').nsgsConfig]"
+                        "value": "[parameters('nsgsConfig')]"
                     },
                     "securityRules": {
-                        "value": "[parameters('network').securityRules]"
+                        "value": "[parameters('securityRules')]"
                     }
                 }
             }

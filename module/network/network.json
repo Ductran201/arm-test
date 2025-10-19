@@ -2,63 +2,62 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "location": {
-        "type": "string"
-      },
-      "vnetConfig": {
-        "type": "object"
-      },
-      "subnetsConfig": {
-        "type": "array"
-      },
-      "nsgsConfig": {
-        "type": "array"
-      },
-      "securityRules": {
-        "type": "array"
-      },
-      "tags": {
-        "type": "object"
-      }
+        "location": {
+            "type": "string"
+        },
+        "vnetConfig": {
+            "type": "object"
+        },
+        "subnetsConfig": {
+            "type": "array"
+        },
+        "nsgsConfig": {
+            "type": "array"
+        },
+        "securityRules": {
+            "type": "array"
+        },
+        "tags": {
+            "type": "object"
+        }
     },
     "variables": {},
     "resources": [
-      {
-        "type": "Microsoft.Network/networkSecurityGroups",
-        "apiVersion": "2023-05-01",
-        "name": "[parameters('nsgsConfig')[copyIndex()].name]",
-        "location": "[parameters('location')]",
-        "tags": "[parameters('tags')]",
-        "copy": {
-          "name": "nsgLoop",
-          "count": "[length(parameters('nsgsConfig'))]"
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-05-01",
+            "name": "[parameters('nsgsConfig')[copyIndex()].name]",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tags')]",
+            "copy": {
+                "name": "nsgLoop",
+                "count": "[length(parameters('nsgsConfig'))]"
+            },
+            "properties": {
+                "securityRules": "[parameters('securityRules')]"
+            }
         },
-        "properties": {
-          "securityRules": "[parameters('securityRules')]"
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2023-05-01",
+            "name": "[parameters('vnetConfig').name]",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tags')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('nsgsConfig')[sub( length(parameters('nsgsConfig')), 1 )].name)]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": "[parameters('vnetConfig').address_space]"
+                },
+                "subnets": "[array(map(parameters('subnetsConfig'), lambda('subnet', createObject('name', lambdaVariables('subnet').name, 'properties', createObject('addressPrefix', lambdaVariables('subnet').address_prefixes[0], 'networkSecurityGroup', createObject('id', reference(resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[indexOf(parameters('subnetsConfig'), lambdaVariables('subnet'))].name)).id))))))]"
+            }
         }
-      },  
-      {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2023-05-01",
-        "name": "[parameters('vnetConfig').name]",
-        "location": "[parameters('location')]",
-        "tags": "[parameters('tags')]",
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": "[parameters('vnetConfig').address_space]"
-          },
-          "subnets": "[array(parameters('subnetsConfig'))]"
-        },
-        "dependsOn": [
-          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('nsgsConfig')[0].name)]"
-        ]
-      }
     ],
     "outputs": {
-      "vnetName": {
-        "type": "string",
-        "value": "[parameters('vnetConfig').name]"
-      }
+        "vnetName": {
+            "type": "string",
+            "value": "[parameters('vnetConfig').name]"
+        }
     }
-  }
-  
+}

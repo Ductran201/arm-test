@@ -20,42 +20,54 @@
                 "TicketID": "4169990"
             }
         },
-        "network": {
-        "value": {
-          "vnetConfig": {
-            "name": "duc-vnet",
-            "address_space": ["10.0.0.0/16"]
-          },
-          "subnetsConfig": [
-            {
-              "name": "public-subnet",
-              "address_prefixes": ["10.0.1.0/24"]
-            },
-            {
-              "name": "private-subnet",
-              "address_prefixes": ["10.0.2.0/24"]
+        "vnetConfig": {
+            "value": {
+                "name": "duc-vnet",
+                "address_space": [
+                    "10.0.0.0/16"
+                ]
             }
-          ],
-          "nsgsConfig": [
-            { "name": "public-nsg" },
-            { "name": "private-nsg" }
-          ],
-          "securityRules": [
-            {
-              "name": "Allow-HTTP",
-              "priority": 100,
-              "direction": "Inbound",
-              "access": "Allow",
-              "protocol": "Tcp",
-              "sourcePortRange": "*",
-              "destinationPortRange": "80",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*"
-            }
-          ]
+        },
+        "subnetsConfig": {
+            "value": [
+                {
+                    "name": "public-subnet",
+                    "address_prefixes": [
+                        "10.0.1.0/24"
+                    ]
+                },
+                {
+                    "name": "private-subnet",
+                    "address_prefixes": [
+                        "10.0.2.0/24"
+                    ]
+                }
+            ]
+        },
+        "nsgsConfig": {
+            "value": [
+                {
+                    "name": "public-nsg"
+                },
+                {
+                    "name": "private-nsg"
+                }
+            ]
+        },
+        "securityRules": {
+            "value": [
+                {
+                    "name": "Allow-HTTP",
+                    "priority": 100,
+                    "direction": "Inbound",
+                    "access": "Allow",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "80",
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*"
+                }
+            ]
         }
-      }
     }
 }
-
-  
