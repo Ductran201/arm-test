@@ -1,0 +1,28 @@
+{
+    "parameters": {
+        "vaultName": {
+            "value": "duc-keyvault-arm"
+        },
+        "location": {
+            "value": "southeastasia"
+        },
+        "tags": {
+            "value": {
+                "BU": "FHN.NGT",
+                "Budget": "200",
+                "BusinessCriticality": "Low",
+                "DataClassification": "Public",
+                "Environment": "DEV",
+                "Expiration": "2025-10-30",
+                "MonitoringEnable": "Yes",
+                "OwnerAccount": "HungNX22@fpt.com",
+                "ProjectKey": "FHNNGTDEVOPS",
+                "Region": "Southeast Asia",
+                "TicketID": "4169990"
+            }
+        },
+        "storageName": {
+            "value": "ducstoragearm123"
+        }
+    }
+}
