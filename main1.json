@@ -2,11 +2,17 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "vaultName": {
+            "type": "String"
+        },
         "location": {
             "type": "string"
         },
         "tags": {
             "type": "object"
+        },
+        "tenantId": {
+            "type": "string"
         }
     },
     "variables": {},
@@ -21,11 +27,17 @@
                     "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/keyvault/keyvault.json"
                 },
                 "parameters": {
+                    "vaultName": {
+                        "value": "[parameters('vaultName')]"
+                    },
                     "location": {
                         "value": "[parameters('location')]"
                     },
                     "tags": {
                         "value": "[parameters('tags')]"
+                    },
+                    "tenantId": {
+                        "value": "[parameters('tenantId')]"
                     }
                 }
             }
