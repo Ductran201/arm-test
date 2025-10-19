@@ -91,6 +91,13 @@
         "vnetName": {
             "type": "string",
             "value": "[parameters('vnetConfig').name]"
+        },
+        "subnetIds": {
+            "type": "array",
+            "value": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetConfig').name, parameters('subnetsConfig')[0].name)]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetConfig').name, parameters('subnetsConfig')[1].name)]"
+            ]
         }
     }
 }

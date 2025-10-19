@@ -19,6 +19,9 @@
         },
         "securityRules": {
             "type": "array"
+        },
+        "aksConfig": {
+            "type": "object"
         }
     },
     "variables": {},
@@ -26,7 +29,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
-            "name": "keyvaultDeployment",
+            "name": "network-deployment",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -50,6 +53,45 @@
                     },
                     "securityRules": {
                         "value": "[parameters('securityRules')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "aks-deployment",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'network-deployment')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/aks/aks.json"
+                },
+                "parameters": {
+                    "aksConfig": {
+                        "value": {
+                            "name": "[parameters('aksConfig').name]",
+                            "dnsPrefix": "[parameters('aksConfig').dnsPrefix]",
+                            "defaultNodePool": {
+                                "name": "[parameters('aksConfig').defaultNodePool.name]",
+                                "vmSize": "[parameters('aksConfig').defaultNodePool.vmSize]",
+                                "nodeCount": "[parameters('aksConfig').defaultNodePool.nodeCount]",
+                                "maxPods": "[parameters('aksConfig').defaultNodePool.maxPods]",
+                                "vnetSubnetId": "[reference('network-deployment').outputs.subnetIds.value[0]]"
+                            },
+                            "identity": {
+                                "type": "[parameters('aksConfig').identity.type]"
+                            },
+                            "networkProfile": "[parameters('aksConfig').networkProfile]"
+                        }
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tags": {
+                        "value": "[parameters('tags')]"
                     }
                 }
             }
