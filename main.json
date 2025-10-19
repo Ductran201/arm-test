@@ -24,7 +24,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/modules/keyvault/keyvault.json"
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/keyvault/keyvault.json"
                 }
             }
         },
@@ -38,7 +38,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/modules/storageAccount/storageAccount.json"
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/storageAccount/storageAccount.json"
                 }
             }
         }
