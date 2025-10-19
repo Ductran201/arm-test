@@ -32,7 +32,7 @@
             "apiVersion": "2025-01-01",
             "name": "[concat(parameters('storageName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageNames'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
