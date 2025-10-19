@@ -88,6 +88,15 @@
                     "dnsServiceIp": "172.16.0.10"
                 }
             }
+        },
+        "vaultName": {
+            "value": "duc-keyvault-arm2"
+        },
+        "storageName": {
+            "value": "ducstoragearm123"
+        },
+        "tenantId": {
+            "value": "f01e930a-b52e-42b1-b70f-a8882b5d043b"
         }
     }
 }
