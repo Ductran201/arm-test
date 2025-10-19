@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vaultName": {
+            "value": "duc-keyvault-arm2"
+        },
+        "location": {
+            "value": "southeastasia"
+        },
+        "tags": {
+            "value": {
+                "BU": "FHN.NGT",
+                "Budget": "200",
+                "BusinessCriticality": "Low",
+                "DataClassification": "Public",
+                "Environment": "DEV",
+                "Expiration": "2025-10-30",
+                "MonitoringEnable": "Yes",
+                "OwnerAccount": "HungNX22@fpt.com",
+                "ProjectKey": "FHNNGTDEVOPS",
+                "Region": "Southeast Asia",
+                "TicketID": "4169990"
+            }
+        },
+        "tenantId": {
+            "value": "f01e930a-b52e-42b1-b70f-a8882b5d043b"
+        }
+    }
+}

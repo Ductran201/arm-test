@@ -79,7 +79,7 @@
                                 "vmSize": "[parameters('aksConfig').defaultNodePool.vmSize]",
                                 "nodeCount": "[parameters('aksConfig').defaultNodePool.nodeCount]",
                                 "maxPods": "[parameters('aksConfig').defaultNodePool.maxPods]",
-                                "vnetSubnetId": "[reference('network-deployment').outputs.subnetIds.value[0]]"
+                                "vnetSubnetId": "[reference('network-deployment').outputs.privateSubnetId.value]"
                             },
                             "identity": {
                                 "type": "[parameters('aksConfig').identity.type]"

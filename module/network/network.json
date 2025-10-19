@@ -88,16 +88,17 @@
         }
     ],
     "outputs": {
-        "vnetName": {
+        "vnetId": {
             "type": "string",
-            "value": "[parameters('vnetConfig').name]"
+            "value": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetConfig').name)]"
         },
-        "subnetIds": {
-            "type": "array",
-            "value": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetConfig').name, parameters('subnetsConfig')[0].name)]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetConfig').name, parameters('subnetsConfig')[1].name)]"
-            ]
+        "privateSubnetId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetConfig').name, 'private-subnet')]"
+        },
+        "publicSubnetId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetConfig').name, 'public-subnet')]"
         }
     }
 }
