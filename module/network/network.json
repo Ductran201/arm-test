@@ -36,7 +36,7 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "[parameters('securityRules')[0].name]",    
+                        "name": "[parameters('securityRules')[0].name]",
                         "properties": {
                             "priority": "[parameters('securityRules')[0].priority]",
                             "direction": "[parameters('securityRules')[0].direction]",
@@ -66,15 +66,20 @@
                 },
                 "subnets": [
                     {
-                        "copy": {
-                            "name": "subnetLoop",
-                            "count": "[length(parameters('subnetsConfig'))]"
-                        },
-                        "name": "[parameters('subnetsConfig')[copyIndex('subnetLoop')].name]",
+                        "name": "[parameters('subnetsConfig')[0].name]",
                         "properties": {
-                            "addressPrefix": "[parameters('subnetsConfig')[copyIndex('subnetLoop')].address_prefixes[0]]",
+                            "addressPrefix": "[parameters('subnetsConfig')[0].address_prefixes[0]]",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[copyIndex('subnetLoop')].name)]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[0].name)]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnetsConfig')[1].name]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetsConfig')[1].address_prefixes[0]]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[1].name)]"
                             }
                         }
                     }
