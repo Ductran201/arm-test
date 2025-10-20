@@ -1,0 +1,189 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "object"
+        },
+        "vnetConfig": {
+            "type": "object"
+        },
+        "subnetsConfig": {
+            "type": "array"
+        },
+        "nsgsConfig": {
+            "type": "array"
+        },
+        "securityRules": {
+            "type": "array"
+        },
+        "aksConfig": {
+            "type": "object"
+        },
+        "storageName": {
+            "type": "string"
+        },
+        "vaultName": {
+            "type": "string"
+        },
+        "tenantId": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "network-deployment",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/network/network.json"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tags": {
+                        "value": "[parameters('tags')]"
+                    },
+                    "vnetConfig": {
+                        "value": "[parameters('vnetConfig')]"
+                    },
+                    "subnetsConfig": {
+                        "value": "[parameters('subnetsConfig')]"
+                    },
+                    "nsgsConfig": {
+                        "value": "[parameters('nsgsConfig')]"
+                    },
+                    "securityRules": {
+                        "value": "[parameters('securityRules')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "aks-deployment",
+            "dependsOn": [
+                "network-deployment"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/aks/aks.json"
+                },
+                "parameters": {
+                    "aksConfig": {
+                        "value": {
+                            "name": "[parameters('aksConfig').name]",
+                            "dnsPrefix": "[parameters('aksConfig').dnsPrefix]",
+                            "defaultNodePool": {
+                                "name": "[parameters('aksConfig').defaultNodePool.name]",
+                                "vmSize": "[parameters('aksConfig').defaultNodePool.vmSize]",
+                                "nodeCount": "[parameters('aksConfig').defaultNodePool.nodeCount]",
+                                "maxPods": "[parameters('aksConfig').defaultNodePool.maxPods]",
+                                "vnetSubnetId": "[reference('network-deployment').outputs.privateSubnetId.value]"
+                            },
+                            "identity": {
+                                "type": "[parameters('aksConfig').identity.type]"
+                            },
+                            "networkProfile": "[parameters('aksConfig').networkProfile]"
+                        }
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tags": {
+                        "value": "[parameters('tags')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "keyvaultDeployment",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/keyvault/keyvault.json"
+                },
+                "parameters": {
+                    "vaultName": {
+                        "value": "[parameters('vaultName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tags": {
+                        "value": "[parameters('tags')]"
+                    },
+                    "tenantId": {
+                        "value": "[parameters('tenantId')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "storageDeployment",
+            "dependsOn": [
+                "keyvaultDeployment"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/Ductran201/arm-test/main/module/storageAccount/storageAccount.json"
+                },
+                "parameters": {
+                    "storageName": {
+                        "value": "[parameters('storageName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "tags": {
+                        "value": "[parameters('tags')]"
+                    }
+                }
+            }
+        }
+    ]
+}
+
+
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccounts": {
+      "type": "array",
+      "defaultValue": [
+        { "name": "sa1", "location": "eastus" },
+        { "name": "sa2", "location": "westus" }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2022-09-01",
+      "name": "[parameters('storageAccounts')[copyIndex('storageLoop')].name]",
+      "location": "[parameters('storageAccounts')[copyIndex('storageLoop')].location]",
+      "sku": { "name": "Standard_LRS" },
+      "kind": "StorageV2",
+      "copy": {
+        "name": "storageLoop",
+        "count": "[length(parameters('storageAccounts'))]"
+      },
+      "properties": {}
+    }
+  ]
+}

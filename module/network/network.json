@@ -36,16 +36,20 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "[parameters('securityRules')[0].name]",
+                        "copy": {
+                            "name": "ruleLoop",
+                            "count": "[length(parameters('securityRules'))]"
+                        },
+                        "name": "[parameters('securityRules')[copyIndex('ruleLoop')].name]",
                         "properties": {
-                            "priority": "[parameters('securityRules')[0].priority]",
-                            "direction": "[parameters('securityRules')[0].direction]",
-                            "access": "[parameters('securityRules')[0].access]",
-                            "protocol": "[parameters('securityRules')[0].protocol]",
-                            "sourcePortRange": "[parameters('securityRules')[0].sourcePortRange]",
-                            "destinationPortRange": "[parameters('securityRules')[0].destinationPortRange]",
-                            "sourceAddressPrefix": "[parameters('securityRules')[0].sourceAddressPrefix]",
-                            "destinationAddressPrefix": "[parameters('securityRules')[0].destinationAddressPrefix]"
+                            "priority": "[parameters('securityRules')[copyIndex('ruleLoop')].priority]",
+                            "direction": "[parameters('securityRules')[copyIndex('ruleLoop')].direction]",
+                            "access": "[parameters('securityRules')[copyIndex('ruleLoop')].access]",
+                            "protocol": "[parameters('securityRules')[copyIndex('ruleLoop')].protocol]",
+                            "sourcePortRange": "[parameters('securityRules')[copyIndex('ruleLoop')].sourcePortRange]",
+                            "destinationPortRange": "[parameters('securityRules')[copyIndex('ruleLoop')].destinationPortRange]",
+                            "sourceAddressPrefix": "[parameters('securityRules')[copyIndex('ruleLoop')].sourceAddressPrefix]",
+                            "destinationAddressPrefix": "[parameters('securityRules')[copyIndex('ruleLoop')].destinationAddressPrefix]"
                         }
                     }
                 ]
@@ -66,20 +70,15 @@
                 },
                 "subnets": [
                     {
-                        "name": "[parameters('subnetsConfig')[0].name]",
+                        "copy": {
+                            "name": "subnetLoop",
+                            "count": "[length(parameters('subnetsConfig'))]"
+                        },
+                        "name": "[parameters('subnetsConfig')[copyIndex('subnetLoop')].name]",
                         "properties": {
-                            "addressPrefix": "[parameters('subnetsConfig')[0].address_prefixes[0]]",
+                            "addressPrefix": "[parameters('subnetsConfig')[copyIndex('subnetLoop')].address_prefixes[0]]",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[0].name)]"
-                            }
-                        }
-                    },
-                    {
-                        "name": "[parameters('subnetsConfig')[1].name]",
-                        "properties": {
-                            "addressPrefix": "[parameters('subnetsConfig')[1].address_prefixes[0]]",
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[1].name)]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgsConfig')[copyIndex('subnetLoop')].name)]"
                             }
                         }
                     }

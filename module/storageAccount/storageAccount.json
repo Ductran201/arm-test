@@ -47,40 +47,6 @@
                     "enabled": false
                 }
             }
-        },
-        {
-            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-            "apiVersion": "2025-01-01",
-            "name": "[concat(parameters('storageName'), '/default/pictures')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
-            ],
-            "properties": {
-                "immutableStorageWithVersioning": {
-                    "enabled": false
-                },
-                "defaultEncryptionScope": "$account-encryption-key",
-                "denyEncryptionScopeOverride": false,
-                "publicAccess": "None"
-            }
-        },
-        {
-            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-            "apiVersion": "2025-01-01",
-            "name": "[concat(parameters('storageName'), '/default/tfstate')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
-            ],
-            "properties": {
-                "immutableStorageWithVersioning": {
-                    "enabled": false
-                },
-                "defaultEncryptionScope": "$account-encryption-key",
-                "denyEncryptionScopeOverride": false,
-                "publicAccess": "None"
-            }
         }
     ]
 }
