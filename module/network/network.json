@@ -34,25 +34,7 @@
                 "count": "[length(parameters('nsgsConfig'))]"
             },
             "properties": {
-                "securityRules": [
-                    {
-                        "copy": {
-                            "name": "ruleLoop",
-                            "count": "[length(parameters('securityRules'))]"
-                        },
-                        "name": "[parameters('securityRules')[copyIndex('ruleLoop')].name]",
-                        "properties": {
-                            "priority": "[parameters('securityRules')[copyIndex('ruleLoop')].priority]",
-                            "direction": "[parameters('securityRules')[copyIndex('ruleLoop')].direction]",
-                            "access": "[parameters('securityRules')[copyIndex('ruleLoop')].access]",
-                            "protocol": "[parameters('securityRules')[copyIndex('ruleLoop')].protocol]",
-                            "sourcePortRange": "[parameters('securityRules')[copyIndex('ruleLoop')].sourcePortRange]",
-                            "destinationPortRange": "[parameters('securityRules')[copyIndex('ruleLoop')].destinationPortRange]",
-                            "sourceAddressPrefix": "[parameters('securityRules')[copyIndex('ruleLoop')].sourceAddressPrefix]",
-                            "destinationAddressPrefix": "[parameters('securityRules')[copyIndex('ruleLoop')].destinationAddressPrefix]"
-                        }
-                    }
-                ]
+                "securityRules": "[parameters('securityRules')]"
             }
         },
         {

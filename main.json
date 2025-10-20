@@ -19,18 +19,6 @@
         },
         "securityRules": {
             "type": "array"
-        },
-        "aksConfig": {
-            "type": "object"
-        },
-        "storageName": {
-            "type": "string"
-        },
-        "vaultName": {
-            "type": "string"
-        },
-        "tenantId": {
-            "type": "string"
         }
     },
     "variables": {},
